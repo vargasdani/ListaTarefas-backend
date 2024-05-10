@@ -1,9 +1,10 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const cors = require('cors');
 
 const app = express();
+app.use(cors()); // Habilita o CORS para todas as origens
 const PORT = 3000;
-
 
 const db = new sqlite3.Database('banco-de-dados.db');
 
@@ -25,10 +26,6 @@ app.post('/tarefas', (req, res) => {
         res.status(201).json({ id: this.lastID, tarefa });
     });
 });
-
-
-
-
 
 // Rota para obter todas as tarefas
 app.get('/tarefas', (req, res) => {
